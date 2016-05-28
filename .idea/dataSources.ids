@@ -18,251 +18,292 @@
       <table id="9" parent="1" name="slides"/>
       <table id="10" parent="1" name="tasks"/>
       <table id="11" parent="1" name="users"/>
-      <column id="12" parent="2" name="id">
+      <table id="12" parent="1" name="games"/>
+      <column id="13" parent="2" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="13" parent="2" name="name">
+      <column id="14" parent="2" name="name">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="14" parent="2" name="release_date">
+      <column id="15" parent="2" name="release_date">
         <mandatory>1</mandatory>
         <data-type>date</data-type>
       </column>
-      <column id="15" parent="2" name="created_at">
+      <column id="16" parent="2" name="created_at">
         <data-type>timestamp</data-type>
       </column>
-      <column id="16" parent="2" name="updated_at">
+      <column id="17" parent="2" name="updated_at">
         <data-type>timestamp</data-type>
       </column>
-      <key id="17" parent="2" name="PRIMARY">
+      <key id="18" parent="2" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="18" parent="3" name="id">
+      <column id="19" parent="3" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="19" parent="3" name="author_name">
+      <column id="20" parent="3" name="author_name">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="20" parent="3" name="author_email">
+      <column id="21" parent="3" name="author_email">
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="21" parent="3" name="title">
+      <column id="22" parent="3" name="title">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="22" parent="3" name="text">
+      <column id="23" parent="3" name="text">
         <mandatory>1</mandatory>
         <data-type>text</data-type>
       </column>
-      <column id="23" parent="3" name="created_at">
+      <column id="24" parent="3" name="created_at">
         <data-type>timestamp</data-type>
       </column>
-      <column id="24" parent="3" name="updated_at">
+      <column id="25" parent="3" name="updated_at">
         <data-type>timestamp</data-type>
       </column>
-      <key id="25" parent="3" name="PRIMARY">
+      <key id="26" parent="3" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="26" parent="4" name="id">
+      <column id="27" parent="4" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="27" parent="4" name="url">
+      <column id="28" parent="4" name="url">
         <data-type>varchar(200)</data-type>
       </column>
-      <column id="28" parent="4" name="felirat">
+      <column id="29" parent="4" name="felirat">
         <data-type>varchar(500)</data-type>
       </column>
-      <column id="29" parent="4" name="slide_id">
+      <column id="30" parent="4" name="slide_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="30" parent="4" name="created_at">
+      <column id="31" parent="4" name="created_at">
         <data-type>timestamp</data-type>
       </column>
-      <column id="31" parent="4" name="updated_at">
+      <column id="32" parent="4" name="updated_at">
         <data-type>timestamp</data-type>
       </column>
-      <key id="32" parent="4" name="PRIMARY">
+      <key id="33" parent="4" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="33" parent="5" name="migration">
+      <column id="34" parent="5" name="migration">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="34" parent="5" name="batch">
+      <column id="35" parent="5" name="batch">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="35" parent="6" name="id">
+      <column id="36" parent="6" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned</data-type>
       </column>
-      <column id="36" parent="6" name="nev">
+      <column id="37" parent="6" name="nev">
         <mandatory>1</mandatory>
         <data-type>varchar(20)</data-type>
       </column>
-      <column id="37" parent="7" name="id">
+      <column id="38" parent="7" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="38" parent="7" name="author_name">
+      <column id="39" parent="7" name="author_name">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="39" parent="7" name="author_email">
+      <column id="40" parent="7" name="author_email">
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="40" parent="7" name="note_text">
+      <column id="41" parent="7" name="note_text">
         <mandatory>1</mandatory>
         <data-type>text</data-type>
       </column>
-      <column id="41" parent="7" name="blog_entry_id">
+      <column id="42" parent="7" name="blog_entry_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="42" parent="7" name="created_at">
+      <column id="43" parent="7" name="created_at">
         <data-type>timestamp</data-type>
       </column>
-      <column id="43" parent="7" name="updated_at">
+      <column id="44" parent="7" name="updated_at">
         <data-type>timestamp</data-type>
       </column>
-      <column id="44" parent="7" name="likes">
+      <column id="45" parent="7" name="likes">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
         <default-expression>&apos;0&apos;</default-expression>
       </column>
-      <key id="45" parent="7" name="PRIMARY">
+      <key id="46" parent="7" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="46" parent="8" name="email">
+      <column id="47" parent="8" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="47" parent="8" name="token">
+      <column id="48" parent="8" name="token">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="48" parent="8" name="created_at">
+      <column id="49" parent="8" name="created_at">
         <mandatory>1</mandatory>
         <data-type>timestamp</data-type>
         <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
       </column>
-      <index id="49" parent="8" name="password_resets_email_index">
+      <index id="50" parent="8" name="password_resets_email_index">
         <columns>email</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="50" parent="8" name="password_resets_token_index">
+      <index id="51" parent="8" name="password_resets_token_index">
         <columns>token</columns>
         <desc-columns></desc-columns>
       </index>
-      <column id="51" parent="9" name="id">
+      <column id="52" parent="9" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="52" parent="9" name="title">
+      <column id="53" parent="9" name="title">
         <mandatory>1</mandatory>
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="53" parent="9" name="description">
+      <column id="54" parent="9" name="description">
         <data-type>varchar(200)</data-type>
       </column>
-      <column id="54" parent="9" name="category">
+      <column id="55" parent="9" name="category">
         <mandatory>1</mandatory>
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="55" parent="9" name="created_at">
+      <column id="56" parent="9" name="created_at">
         <data-type>timestamp</data-type>
       </column>
-      <column id="56" parent="9" name="updated_at">
+      <column id="57" parent="9" name="updated_at">
         <data-type>timestamp</data-type>
       </column>
-      <column id="57" parent="9" name="year">
+      <column id="58" parent="9" name="year">
         <data-type>year(4)</data-type>
       </column>
-      <key id="58" parent="9" name="PRIMARY">
+      <key id="59" parent="9" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="59" parent="10" name="id">
+      <column id="60" parent="10" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="60" parent="10" name="user_id">
+      <column id="61" parent="10" name="user_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="61" parent="10" name="name">
+      <column id="62" parent="10" name="name">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="62" parent="10" name="created_at">
+      <column id="63" parent="10" name="created_at">
         <data-type>timestamp</data-type>
       </column>
-      <column id="63" parent="10" name="updated_at">
+      <column id="64" parent="10" name="updated_at">
         <data-type>timestamp</data-type>
       </column>
-      <index id="64" parent="10" name="tasks_user_id_index">
+      <index id="65" parent="10" name="tasks_user_id_index">
         <columns>user_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="65" parent="10" name="PRIMARY">
+      <key id="66" parent="10" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="66" parent="11" name="id">
+      <column id="67" parent="11" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="67" parent="11" name="name">
+      <column id="68" parent="11" name="name">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="68" parent="11" name="email">
+      <column id="69" parent="11" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="69" parent="11" name="password">
+      <column id="70" parent="11" name="password">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="70" parent="11" name="remember_token">
+      <column id="71" parent="11" name="remember_token">
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="71" parent="11" name="created_at">
+      <column id="72" parent="11" name="created_at">
         <data-type>timestamp</data-type>
       </column>
-      <column id="72" parent="11" name="updated_at">
+      <column id="73" parent="11" name="updated_at">
         <data-type>timestamp</data-type>
       </column>
-      <index id="73" parent="11" name="users_email_unique">
+      <index id="74" parent="11" name="users_email_unique">
         <columns>email</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="74" parent="11" name="PRIMARY">
+      <key id="75" parent="11" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <key id="75" parent="11" name="users_email_unique">
+      <key id="76" parent="11" name="users_email_unique">
         <columns>email</columns>
         <underlying-index>users_email_unique</underlying-index>
       </key>
+      <column id="77" parent="12" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="78" parent="12" name="started">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="79" parent="12" name="won">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="80" parent="12" name="steps">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="81" parent="12" name="user_id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+      </column>
+      <column id="82" parent="12" name="created_at">
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="83" parent="12" name="updated_at">
+        <data-type>timestamp</data-type>
+      </column>
+      <index id="84" parent="12" name="games_user_id_foreign">
+        <columns>user_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="85" parent="12" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="86" parent="12" name="games_user_id_foreign">
+        <columns>user_id</columns>
+        <ref-key>~.users.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
     </database-model>
   </data-source>
 </component>
