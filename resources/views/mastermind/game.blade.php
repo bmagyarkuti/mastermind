@@ -54,7 +54,7 @@
                 <div class="panel-body">
                     @include('common.errors')
 
-                    <form action="step" method="POST" class="form-horizontal">
+                    <form action="{{url('/step')}}" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
 
                             <div class="row">
