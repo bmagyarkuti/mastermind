@@ -2,59 +2,64 @@
 
 @section('content')
     <div class="container">
-        <div class="col-sm-12">
-            <!-- Current Tasks -->
-            @if (count($guesses) > 0)
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Earlier Guesses
-                    </div>
+        @if (count($guesses) > 0)
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Earlier Guesses
+                </div>
 
-                    <div class="panel-body">
-                        @foreach($guesses as $index => $guess)
+                <div class="panel-body">
+                    @foreach($guesses as $index => $guess)
                         <div class="row">
-                            <label class="col-sm-1 control-label">#{{$index + 1}}</label>
+                            <label class="col-xs-1">#{{$index + 1}}</label>
 
                             @foreach($guess as $color)
-                                <div class="col-sm-2">
-                                    <p>{{$color}}</p>
+                                <div class="col-xs-2">
+                                    <div class="btn btn-{{$color}} disabled btn-block">
+                                    {{$color}}
+                                    </div>
                                 </div>
                             @endforeach
 
-                        <!-- Add Task Button -->
-                            <div class="col-sm-2">
-                                <p>
-                                @foreach($evals[$index] as $eval)
-                                    {{$eval}}
-                                @endforeach
-                                </p>
+                            <div class="col-xs-offset-1 col-xs-2">
+                                <div class="row gutter-10">
+                                    <div class=" col-xs-3">
+                                        <div class ="btn btn-{{$evals[$index][0]}} disabled btn-xs btn-block">x</div>
+                                    </div>
+                                    <div class=" col-xs-3">
+                                        <div class ="btn btn-{{$evals[$index][1]}} disabled btn-xs btn-block">x</div>
+                                    </div>
+                                </div>
+                                <div class="row gutter-10">
+                                    <div class=" col-xs-3">
+                                        <div class ="btn btn-{{$evals[$index][2]}} disabled btn-xs btn-block">x</div>
+                                    </div>
+                                    <div class=" col-xs-3">
+                                        <div class ="btn btn-{{$evals[$index][3]}} disabled btn-xs btn-block">x</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        @endforeach
-                    </div>
+                    @endforeach
                 </div>
-            @endif
+            </div>
+        @endif
 
-            @if (!$isWon && count($guesses) < 10)
+        @if (!$isWon && count($guesses) < 10)
             <div class="panel panel-default">
                 <div class="panel-heading">
                     New Guess
                 </div>
 
                 <div class="panel-body">
-                    <!-- Display Validation Errors -->
-                @include('common.errors')
+                    @include('common.errors')
 
-                <!-- New Task Form -->
                     <form action="step" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
 
-                        <!-- Task Name -->
                             <div class="row">
-
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label">#{{count($guesses) + 1}}</label>
-
 
                                     @for($i = 1; $i <= 4; $i++)
                                     <div class="col-sm-2">
@@ -68,7 +73,7 @@
                                     @endfor
 
                                 <!-- Add Task Button -->
-                                    <div class="col-sm-2">
+                                    <div class="col-xs-3">
                                         <button type="submit" class="btn btn-default">
                                             <i class="fa fa-btn fa-plus"></i>Send Guess
                                         </button>
@@ -78,28 +83,36 @@
                     </form>
                 </div>
             </div>
-        </div>
         @else
-        <div class="panel-body">
-            <div class="jumbotron">
-                    @if ($isWon)
-                        <h1>
-                        Congratulations, you cracked the code.
-                        </h1>
-                    @else
-                        <h1>
-                        Nope, that's still not it. However, your lives ran out.
-                        <p>
-                            The correct pattern was:
-                            @foreach($codePattern as $color)
-                                {{$color}}
-                            @endforeach
-                        </p>
-                        </h1>
-                    @endif
+            <div class="panel-body">
+                <div class="jumbotron">
+                        @if ($isWon)
+                            <h1>
+                            Congratulations, you cracked the code.
+                            </h1>
+                        @else
+                            <h1>
+                            Nope, that's still not it. However, your lives ran out.
+                            </h1>
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <p>The correct pattern was:</p>
+                                </div>
+                                @foreach($codePattern as $color)
+                                    <div class="col-xs-2">
+
+                                        <div class="btn btn-{{$color}} disabled btn-block">
+                                            {{$color}}
+                                        </div>
+                                    </div>
+                                @endforeach
+                                </div>
+                        @endif
+                </div>
             </div>
-        </div>
         @endif
+
 
     </div>
 @endsection
