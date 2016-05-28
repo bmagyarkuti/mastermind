@@ -43,7 +43,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="http://webprogramozas.inf.elte.hu/hallgatok/mabpafb/mastermind/public/index.php/">
+            <a class="navbar-brand" href="{{url('/')}}">
                 Mastermind
             </a>
         </div>
