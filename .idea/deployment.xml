@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="webprog" uploadOnCheckin="74d91c26-531d-469d-b289-0bae06635566">
+    <serverData>
+      <paths name="webprog">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/www/mastermind" local="$PROJECT_DIR$" web="mastermind/public/index.php" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="webprog" />
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
