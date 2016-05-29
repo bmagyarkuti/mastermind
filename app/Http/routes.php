@@ -11,14 +11,19 @@
 |
 */
 
-Route::get('/', 'GameController@newGame');
-Route::match(['get', 'post'], 'step', 'GameController@step');
+// this fixed token mismatch exceptions
+Route::group(['middleware' => ['web']], function() {
+    Route::get('/', 'GameController@getLeaders');
+    Route::post('step', 'GameController@postStep');
+    Route::get('step', 'GameController@getStep');
+    Route::get('newGame', 'GameController@newGame');
 
-// Authentication Routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@logout');
+    // Authentication Routes...
+    Route::get('auth/login', 'Auth\AuthController@getLogin');
+    Route::post('auth/login', 'Auth\AuthController@postLogin');
+    Route::get('auth/logout', 'Auth\AuthController@logout');
 
-// Registration Routes...
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
+    // Registration Routes...
+    Route::get('auth/register', 'Auth\AuthController@getRegister');
+    Route::post('auth/register', 'Auth\AuthController@postRegister');
+});

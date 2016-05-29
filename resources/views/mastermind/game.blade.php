@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         @if (count($guesses) > 0)
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Earlier Guesses
@@ -34,7 +35,7 @@
                                     <div class=" col-xs-3">
                                         <div class ="btn btn-{{$evals[$index][2]}} disabled btn-xs btn-block">x</div>
                                     </div>
-                                    <div class=" col-xs-3">
+                                    <div class="col-xs-3">
                                         <div class ="btn btn-{{$evals[$index][3]}} disabled btn-xs btn-block">x</div>
                                     </div>
                                 </div>
@@ -45,7 +46,7 @@
             </div>
         @endif
 
-        @if (!$isWon && count($guesses) < 10)
+        @if (!$isGameOver)
             <div class="panel panel-default">
                 <div class="panel-heading">
                     New Guess
@@ -83,36 +84,48 @@
                     </form>
                 </div>
             </div>
-        @else
-            <div class="panel-body">
-                <div class="jumbotron">
-                        @if ($isWon)
-                            <h1>
+        @elseif($isGameOver)
+            @if ($isWon)
+                <div class="panel-body">
+                    <div class="jumbotron">
+                        <h1>
                             Congratulations, you cracked the code.
-                            </h1>
-                        @else
-                            <h1>
-                            Nope, that's still not it. However, your lives ran out.
-                            </h1>
-
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <p>The correct pattern was:</p>
-                                </div>
-                                @foreach($codePattern as $color)
-                                    <div class="col-xs-2">
-
-                                        <div class="btn btn-{{$color}} disabled btn-block">
-                                            {{$color}}
-                                        </div>
-                                    </div>
-                                @endforeach
-                                </div>
+                        </h1>
+                        @if(\Auth::check())
+                            <h2>
+                                Here's how your result compares against your own record.
+                            </h2>
+                            <p>
+                                You took <strong>{{count($guesses)}}</strong> steps to crack
+                                the code.
+                                @if($stats['count'] > 1)
+                                    Usually, this takes <strong>{{$stats['the_stats']->average}} steps.</strong>
+                                    The longest it ever took you to win was <strong>{{$stats['the_stats']->worst}}</strong>
+                                    steps. Your best win took <strong>{{$stats['the_stats']->best}}</strong> steps.
+                                @endif
+                            </p>
                         @endif
+            @else
+                        <h1>
+                        Nope, that's still not it. However, your lives ran out.
+                        </h1>
+
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <p>The correct pattern was:</p>
+                            </div>
+                            @foreach($codePattern as $color)
+                                <div class="col-xs-2">
+
+                                    <div class="btn btn-{{$color}} disabled btn-block">
+                                        {{$color}}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+            @endif
+                    </div>
                 </div>
-            </div>
         @endif
-
-
     </div>
 @endsection
