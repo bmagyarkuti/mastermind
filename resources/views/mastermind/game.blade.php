@@ -64,10 +64,10 @@
 
                                     @for($i = 1; $i <= 4; $i++)
                                     <div class="col-sm-2">
-                                        <select name="color{{$i}}" title="" class="selectpicker form-control" id="{{$i}}" data-style="green">
+                                        <select name="color{{$i}}" title="" class="selectpicker form-control">
                                             <option disabled selected value>Color...</option>
                                             @foreach($colors as $color)
-                                                <option class="{{$color}}">{{$color}}</option>
+                                                <option @if (old('color'.$i) == $color) selected="selected" @endif>{{$color}}</option>
                                             @endforeach
                                         </select>
                                     </div>
