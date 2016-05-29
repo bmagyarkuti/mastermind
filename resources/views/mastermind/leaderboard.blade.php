@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-            <div class="col-sm-offset-2 col-sm-8">
                 @if(\Auth::check() && count($myGames) > 0)
+                <div class="col-sm-7">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Personal Statistics for {{$name}}
@@ -34,10 +34,15 @@
                             </table>
 
                             <p>Usually, it takes <strong>{{$stats->average}}</strong> steps for you to win.</strong>
-                                The longest it ever took you to win was <strong>{{$stats->worst}}</strong>
-                                steps. Your best win took <strong>{{$stats->best}}</strong> steps.</p>
+                                Your most difficult win took <strong>{{$stats->worst}}</strong>
+                                steps. Your easiest win took <strong>{{$stats->best}}</strong> steps.</p>
                         </div>
                     </div>
+                </div>
+                    <div class="col-sm-5">
+                @else
+            <div class="col-sm-offset-2 col-sm-8">
+
                 @endif
                 @if (count($entries) > 0)
                     <div class="panel panel-default">
@@ -49,7 +54,7 @@
                         @if(!\Auth::check())
                         <p class="alert-warning">
                             Your are currently browsing as guest. This means we won't be able to save your results
-                            on the leaderboard. If you'd like to see your result here, <a href="{{url('auth/login')}}">
+                            on the leaderboard. If you'd like to see your results here, <a href="{{url('auth/login')}}">
                             log in</a> before you start playing.
                         </p>
                         @endif
