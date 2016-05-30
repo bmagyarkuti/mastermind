@@ -25,21 +25,21 @@
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <div class="btn btn-{{$evals[$index][0]}} disabled btn-xs btn-block">x
+                                                <div id="eval1" class="btn btn-{{$evals[$index][0]}} disabled btn-xs btn-block">x
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="btn btn-{{$evals[$index][1]}} disabled btn-xs btn-block">x
+                                                <div id="eval2" class="btn btn-{{$evals[$index][1]}} disabled btn-xs btn-block">x
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="btn btn-{{$evals[$index][2]}} disabled btn-xs btn-block">x
+                                                <div id="eval3" class="btn btn-{{$evals[$index][2]}} disabled btn-xs btn-block">x
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="btn btn-{{$evals[$index][3]}} disabled btn-xs btn-block">x
+                                                <div id="eval4" class="btn btn-{{$evals[$index][3]}} disabled btn-xs btn-block">x
                                                 </div>
                                             </td>
                                         </tr>
@@ -50,7 +50,7 @@
                         @endforeach
 
                         @if(!$isGameOver)
-                            <tr>
+                            <tr id="insertRow">
                                 <form action="{{url('/step')}}" method="POST" class="form-horizontal">
                                     {{ csrf_field() }}
                                     <td class="hidden-xs">
@@ -68,7 +68,7 @@
                                         </td>
                                     @endfor
                                     <td>
-                                        <button type="submit" class="btn btn-default">
+                                        <button id="submitButton" type="submit" class="btn btn-default">
                                             <i class="fa fa-btn fa-plus"></i>Send
                                         </button>
                                     </td>
@@ -150,4 +150,5 @@
 
 @section('scripts')
     <script src="{{\URL::asset('js/login.js')}}"></script>
+    <script src="{{\URL::asset('js/game.js')}}"></script>
 @endsection
