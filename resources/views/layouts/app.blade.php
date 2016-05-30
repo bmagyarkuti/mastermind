@@ -13,12 +13,6 @@
 
     <!-- Styles -->
     <link  rel="stylesheet" href="{{URL::asset('css/bootstrap.css')}}">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-    <!-- Bootstrap Select -->
-    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">--}}
-    {{--<script type="text/javascript">--}}
-        {{--document.write('<link rel="stylesheet" href="css/bootstrap_select.css">');--}}
-    {{--</script>--}}
 
     <style>
         body {
@@ -30,6 +24,7 @@
     </style>
 </head>
 <body id="app-layout">
+
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
@@ -52,13 +47,15 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a href="{{@url('newGame')}}">New Game</a></li>
+                <li><a href="{{@url('step')}}">Continue Playing</a></li>
+                <li><a href="{{@url('/')}}">Statistics & Leaderboard</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ url('auth/login') }}">Login</a></li>
+                    <li><a href="{{ url('auth/login') }}" id="login", title="Log in...">Login</a></li>
                     <li><a href="{{ url('auth/register') }}">Register</a></li>
                 @else
                     <li class="dropdown">
@@ -78,6 +75,7 @@
 
 @yield('content')
 
+
 <!-- JavaScripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -85,6 +83,7 @@
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>--}}
  {{--<script src="{{ elixir('js/app.js') }}"></script>--}}
 {{--<script src="js/bootstrap-select.js"></script>--}}
-<script src="{{URL::asset('js/mastermind_game.js')}}"></script>
+@yield('scripts')
+
 </body>
 </html>

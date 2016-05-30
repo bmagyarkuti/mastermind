@@ -95,4 +95,9 @@
                 </div>
             </div>
     </div>
+</div>
+@endsection
+
+@section('scripts')
+    <script src="{{\URL::asset('js/mastermind_game.js')}}"></script>
 @endsection

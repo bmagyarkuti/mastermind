@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+
 
 class AuthController extends Controller
 {
@@ -68,5 +70,27 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function ajaxLogin(Request $request) {
+        if (\Request::ajax()){
+            $response = [];
+
+            if (empty($request->user)){
+                $response['message'] = "You didn't specify an email-address";
+            } elseif (empty($request->psw)){
+                $response['message'] = "You didn't enter a password";
+            } elseif (\Auth::attempt(['email' => $request->user, 'password' => $request->psw])) {
+                $response['success'] = true;
+                $response['user'] = \Auth::user()->id;
+            } else {
+                $response['success'] = false;
+                $response['message'] = 'Login failed.';
+            }
+
+            return json_encode($response);
+        } else {
+            return "This function only handles AJAX requests.";
+        }
     }
 }
