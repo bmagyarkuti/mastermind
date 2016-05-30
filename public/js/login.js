@@ -58,7 +58,7 @@
             if (data.success){
                 console.log(data);
                 $modal.modal('hide');
-                $source = $('#main_page');
+                let $source = $('a#main_page');
                 $('#leaderboard').load($source.attr('href') + ' #leaderboard');
                 $('#accountButtons').load($source.attr('href') + ' #accountButtons');
             } else {
@@ -85,6 +85,5 @@
     $(document).ready(function () {
         fixURL();
         replaceLoginWithJSPopUp();
-        console.log($link);
     });
 }

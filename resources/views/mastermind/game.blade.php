@@ -149,5 +149,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{\URL::asset('loglogin.jst>
+    <script src="{{\URL::asset('js/login.js')}}"></script>
 @endsection
