@@ -103,7 +103,7 @@
 
             for (let i = 0; i < 4; ++i) {
                 $('div#btn' + (i + 1), $displayRow).attr('class', 'btn btn-' + colors[i]+ ' disabled btn-block');
-                $('div#btn' + (i + 1), $displayRow).text(colors[i]);
+                $('div#btn' + (i + 1), $displayRow).html('<span class="hidden-xs hidden-sm">' + colors[i] + '</span> <span class="visible-xs visible-sm">' + colors[i][1]);
                 $('div#eval'+ (i + 1), $displayRow).attr('class', 'btn btn-' + evals[i] +' disabled btn-xs btn-block')
             }
 
