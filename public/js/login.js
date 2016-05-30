@@ -4,7 +4,7 @@
 
 // fix index.php address (add /)
 {
-    let $link = $('#login');
+    let $link = $('a#login');
     let $modal = $(`<div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
                 
@@ -42,20 +42,25 @@
 
         let user = $('input[name="email"]', $modal).val();
         let psw = $('input[name="password"]', $modal).val();
+        let remember = $('input[name="remember"]', $modal).prop('checked');
 
-        console.log(user, psw);
+        console.log(user, psw, remember);
         $.ajax("ajax/auth/login", {
             type: 'POST',
             dataType: 'JSON',
             data: {
                 user: user,
-                psw: psw
+                psw: psw,
+                remember: remember
             }
         }).done(function (data){
             console.log('helo');
             if (data.success){
                 console.log(data);
                 $modal.modal('hide');
+                $source = $('#main_page');
+                $('#leaderboard').load($source.attr('href') + ' #leaderboard');
+                $('#accountButtons').load($source.attr('href') + ' #accountButtons');
             } else {
                 $error_message.show();
                 $('#errorDisplay', $modal).text(data.message);
@@ -80,5 +85,6 @@
     $(document).ready(function () {
         fixURL();
         replaceLoginWithJSPopUp();
+        console.log($link);
     });
 }

@@ -38,7 +38,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{url('/')}}">
+            <a class="navbar-brand" href="{{url('/')}}" id="main_page">
                 Mastermind
             </a>
         </div>
@@ -52,10 +52,10 @@
             </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" id="accountButtons">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ url('auth/login') }}" id="login", title="Log in...">Login</a></li>
+                    <li><a href="{{ url('auth/login') }}" id="login" title="Log in...">Login</a></li>
                     <li><a href="{{ url('auth/register') }}">Register</a></li>
                 @else
                     <li class="dropdown">

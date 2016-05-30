@@ -80,17 +80,16 @@ class AuthController extends Controller
                 $response['message'] = "You didn't specify an email-address";
             } elseif (empty($request->psw)){
                 $response['message'] = "You didn't enter a password";
-            } elseif (\Auth::attempt(['email' => $request->user, 'password' => $request->psw])) {
+            } elseif (\Auth::attempt(['email' => $request->user, 'password' => $request->psw], $request->remember)) {
                 $response['success'] = true;
                 $response['user'] = \Auth::user()->id;
             } else {
                 $response['success'] = false;
                 $response['message'] = 'Login failed.';
             }
-
             return json_encode($response);
         } else {
-            return "This function only handles AJAX requests.";
+            return "This address only handles AJAX requests.";
         }
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container" id="leaderboard">
                 @if(\Auth::check() && count($myGames) > 0)
                 <div class="col-sm-7">
                     <div class="panel panel-default">
@@ -54,7 +54,7 @@
                         @if(!\Auth::check())
                         <p class="alert-warning">
                             Your are currently browsing as guest. This means we won't be able to save your results
-                            on the leaderboard. If you'd like to see your results here, <a href="{{url('auth/login')}}">
+                            on the leaderboard. If you'd like to see your results here, <a href="{{url('auth/login')}}" id="login">
                             log in</a> before you start playing.
                         </p>
                         @endif
@@ -99,5 +99,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{\URL::asset('js/mastermind_game.js')}}"></script>
+    <script src="{{\URL::asset('js/login.js')}}"></script>
 @endsection

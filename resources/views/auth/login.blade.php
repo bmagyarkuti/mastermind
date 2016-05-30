@@ -11,8 +11,6 @@
                         {!! csrf_field() !!}
                         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-
-
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">E-Mail Address</label>
 

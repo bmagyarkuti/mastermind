@@ -149,5 +149,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{\URL::asset('js/mastermind_game.js')}}"></script>
+    <script src="{{\URL::asset('loglogin.jst>
 @endsection
