@@ -1,16 +1,16 @@
 /**
  * Created by barna on 31/05/16.
  */
+"use strict";
+
 let createGameModel = function () {
     let stepsAllowed = 10;
     let colors = ['white', 'black', 'red', 'green', 'yellow', 'blue'];
     let codePattern = [];
-    let started = new Date().getTime();
-    let won;
-    let isGameWon = false;
+    let startedDateTime = new Date().getTime();
     let steps = 0;
-    let isGameOver = false;
-    let gameWonEvent = createEvent(this);
+    let gameWonEvent = createEvent();
+    let gameLostEvent = createEvent();
 
     let init = function() {
         for (let i = 0; i < 4; ++i) {
@@ -54,27 +54,37 @@ let createGameModel = function () {
                 isWinningCombo = false;
             }
         });
-        isGameWon = isWinningCombo;
-        if (isGameWon) {
-            won = new Date().getTime();
+
+        if (isWinningCombo) {
+            gameWonEvent.notify({
+                results: {
+                    started: startedDateTime,
+                    won: new Date().getTime(),
+                    steps: steps
+                }
+            });
+        } else if (steps === 10) {
+            gameLostEvent.notify({
+                codePattern: codePattern,
+                results: {
+                    started: startedDateTime,
+                    won: null,
+                    steps: null
+                }
+            });
         }
-        isGameOver = isWinningCombo || steps === 10;
-        if (isGameOver) {
-            gameWonEvent.notify();
-        }
+
         return evals;
     };
 
     init();
 
     return {
+        init: init,
         makeStep: makeStep,
-        isGameWon: function() { return isGameWon;},
-        isGameOver: function() { return isGameOver; },
-        getStarted: function() { return started; },
-        getWon: function() { return won; },
         getSteps: function() { return steps; },
         getStepsAllowed: function () { return stepsAllowed; },
-        gameWonEvent: gameWonEvent
+        gameWonEvent: gameWonEvent,
+        gameLostEvent: gameLostEvent
     };
 };

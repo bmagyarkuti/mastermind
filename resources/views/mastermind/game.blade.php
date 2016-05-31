@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="col-sm-offset-2 col-sm-8">
-            <div class="panel panel-default">
+            <div id="gameTable" class="panel panel-default">
                 <div class="panel-heading">
                     You have <span id="remainingSteps">{{10 - count($guesses)}}</span> turns left.
                 </div>
@@ -118,7 +118,7 @@
                             <div class="col-xs-3">
                                 <p>However, your lives ran out. The correct pattern was:</p>
                             </div>
-                            <div class="col-xs-4 col-sm-offset-2">
+                            <div class="col-xs-5 col-sm-offset-2">
                                     <table>
                                         <tbody>
                                         <tr>
@@ -143,7 +143,8 @@
 
 @section('scripts')
     <script src="{{\URL::asset('js/login.js')}}"></script>
+    <script src="{{\URL::asset('js/gameEvent.js')}}"></script>
     <script src="{{\URL::asset('js/gameModel.js')}}"></script>
     <script src="{{\URL::asset('js/gameUI.js')}}"></script>
-    <script src="{{\URL::asset('js/gameEvent.js')}}"></script>
+    <script src="{{\URL::asset('gamePersistenceAJAX.js')}}"></script>
 @endsection

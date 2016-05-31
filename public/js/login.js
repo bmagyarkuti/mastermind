@@ -45,7 +45,6 @@
         let psw = $('input[name="password"]', $modal).val();
         let remember = $('input[name="remember"]', $modal).prop('checked');
 
-        console.log(user, psw, remember);
         $.ajax("ajax/auth/login", {
             type: 'POST',
             dataType: 'JSON',

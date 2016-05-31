@@ -1,9 +1,12 @@
 /**
+ *
+ * A helper class for implementing the Observer pattern.
+ *
  * Created by barna on 31/05/16.
  */
 
 "use strict";
-let createEvent = function(sender) {
+let createEvent = function() {
     let listeners = [];
 
     let addListener = function (listener) {
@@ -12,7 +15,7 @@ let createEvent = function(sender) {
 
     let notify = function(args) {
         listeners.forEach(function (listener) {
-            listener(sender, args);
+            listener(args);
         });
     };
     return {
