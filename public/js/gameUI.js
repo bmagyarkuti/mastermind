@@ -53,6 +53,73 @@ let createGameUI = function(model) {
                             </div>
                         </div>`);
     let colorBoxTemplate = `<div></div>`;
+    let newGameTemplate = `<div class="panel-heading">
+                    You have <span id="remainingSteps">10</span> turns left.
+                </div>
+
+                <div class="panel-body">
+                    <table id="bigTable" class="table">
+                        <tbody>
+                            <tr id="insertRow">
+                                <form action="step" method="POST" class="form-horizontal">
+                                    <td class="hidden-xs" id="insertCount">
+                                        #1
+                                    </td>
+
+                                    <td>
+                                    <select name="color1" title="" class="selectpicker form-control">
+                                            <option disabled selected value>Color...</option>
+                                            <option >white</option>
+                                            <option >black</option>
+                                            <option >red</option>
+                                            <option >green</option>
+                                            <option >yellow</option>
+                                            <option >blue</option>
+                                    </select>
+                                    </td>
+                                    <td>
+                                    <select name="color2" title="" class="selectpicker form-control">
+                                            <option disabled selected value>Color...</option>
+                                            <option >white</option>
+                                            <option >black</option>
+                                            <option >red</option>
+                                            <option >green</option>
+                                            <option >yellow</option>
+                                            <option >blue</option>
+                                    </select>
+                                    </td>
+                                    <td>
+                                    <select name="color3" title="" class="selectpicker form-control">
+                                            <option disabled selected value>Color...</option>
+                                            <option >white</option>
+                                            <option >black</option>
+                                            <option >red</option>
+                                            <option >green</option>
+                                            <option >yellow</option>
+                                            <option >blue</option>
+                                    </select>
+                                    </td>
+                                    <td>
+                                    <select name="color4" title="" class="selectpicker form-control">
+                                            <option disabled selected value>Color...</option>
+                                            <option >white</option>
+                                            <option >black</option>
+                                            <option >red</option>
+                                            <option >green</option>
+                                            <option >yellow</option>
+                                            <option >blue</option>
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <button id="submitButton" type="submit" class="btn btn-default">
+                                            <i class="fa fa-btn fa-plus"></i>Send
+                                        </button>
+                                    </td>
+                                </form>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>`;
 
     let init = function() {
         gameModel.gameWonEvent.addListener(displayWin);
@@ -142,12 +209,23 @@ let createGameUI = function(model) {
         displayRow(gameModel.getSteps(), colors, evals);
     };
 
+    let startNewGame = function () {
+        $('div#gameTable').html(newGameTemplate);
+        $('button#submitButton').click(function (e) {
+            e.preventDefault();
+            onSubmitButtonClicked();
+            gameModel.newGame();
+        });
+
+    };
+
     init();
 
     return {
         mineAjaxToken: mineAjaxToken,
         showSuccessResponse: showSuccessResponse,
         showFailureResponse: showFailureResponse,
-        onSubmitButtonClicked: onSubmitButtonClicked
+        onSubmitButtonClicked: onSubmitButtonClicked,
+        startNewGame: startNewGame
     };
 };

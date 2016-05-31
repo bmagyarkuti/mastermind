@@ -11,6 +11,11 @@ $(document).ready(function () {
         gameUI.onSubmitButtonClicked();
     });
 
+    $('a#newGame').click(function (e){
+        e.preventDefault();
+        gameUI.startNewGame();
+    });
+
     persistence.successfullySavedEvent.addListener(function(stats) {
         gameUI.showSuccessResponse(stats);
     });
