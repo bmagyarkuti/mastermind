@@ -11,8 +11,7 @@
         let isGameWon = false;
         let steps = 0;
         let isGameOver = false;
-        let evals = [];
-        
+
         let init = function() {
             for (let i = 0; i < 4; ++i) {
                 codePattern.push(colors[Math.floor(Math.random() * colors.length)]);
@@ -22,31 +21,33 @@
         /**
          *  @param {Array<string>} guesses*/
         let evaluatePattern = function (guesses) {
+            let localGuesses = guesses.slice();
             let localCodePattern = codePattern.slice();
             evals = [];
             for (let i = 0; i < 4; ++i) {
-                if (guesses[i] === localCodePattern[i]) {
+                if (localGuesses[i] === localCodePattern[i]) {
                     evals[i] = "black";
-                    guesses[i] = null;
+                    localGuesses[i] = null;
                     localCodePattern[i] = null;
                 }
             }
             for (let i = 0; i < 4; ++i) {
                 let patternIndex;
-                if (guesses[i] !== null && (patternIndex = localCodePattern.indexOf(guesses[i])) !== -1) {
+                if (localGuesses[i] !== null && (patternIndex = localCodePattern.indexOf(localGuesses[i])) !== -1) {
                     evals[i] = "white";
-                    guesses[i] = null;
+                    localGuesses[i] = null;
                     localCodePattern[patternIndex] = null;
                 } else {
                     evals[i] = 'neither';
                 }
             }
+            return evals;
         };
 
         let makeStep = function (guesses) {
             steps += 1;
 
-            evaluatePattern(guesses);
+            evals = evaluatePattern(guesses);
             let isWinningCombo = true;
             evals.forEach(function(color) {
                 if (color !== "black") {
@@ -58,18 +59,18 @@
                 won = new Date().getTime();
             }
             isGameOver = isWinningCombo || steps === 10;
+            return evals;
         };
         
         init();
         
         return {
             makeStep: makeStep,
-            iGameWon: isGameWon,
-            isGameOver: isGameOver,
-            evals: evals,
-            started: started,
-            won: won,
-            steps: steps
+            isGameWon: function() { return isGameWon;},
+            isGameOver: function() { return isGameOver; },
+            getStarted: function() { return started; },
+            getWon: function() { return won; },
+            getSteps: function() { return steps; }
         };
     };
     
@@ -110,9 +111,25 @@
             $('tr#insertRow').before($displayRow);
         };
 
-        return {
-            displayRow: displayRow
+        let collectSelections = function () {
+            selectedColors = [];
+            for (let i = 1; i <= 4; ++i) {
+                selectedColors.push($('select[name=color' + i).find(":selected").text())
+            }
+            return selectedColors;
         };
+
+        let collectEvals = function(guesses) {
+            return gameModel.makeStep(guesses);
+        };
+
+        return {
+            displayRow: displayRow,
+            collectSelections: collectSelections,
+            collectEvals: collectEvals,
+            getSteps: function() { return gameModel.getSteps(); }
+        };
+
     };
 
     let gameUI = createGameUI();
@@ -120,7 +137,9 @@
     $(document).ready(function () {
         $('button#submitButton').click(function (e) {
             e.preventDefault();
-            gameUI.displayRow(1, ['red', 'green', 'blue', 'black'], ['white', 'neither', 'neither', 'black']);
+            colors = gameUI.collectSelections();
+            evals = gameUI.collectEvals(colors);
+            gameUI.displayRow(gameUI.getSteps(), colors, evals);
         });
     })
 }
