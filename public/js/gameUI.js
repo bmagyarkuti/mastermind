@@ -99,7 +99,6 @@ let createGameUI = function(model) {
         $('#gameTable').after($wonMessage);
     };
 
-
     let showSuccessResponse = function(stats) {
         let $statistics = $(`<p>You took <strong id="guesses"></strong> steps to crack the code.
                             <span id="statistics">
@@ -132,7 +131,13 @@ let createGameUI = function(model) {
     };
 
     let onSubmitButtonClicked = function() {
+        $('p#errorMessage').remove();
         let colors = collectSelections();
+        if (colors.indexOf('Color...') !== -1) {
+            let $bigTable = $('table#bigTable');
+            $bigTable.after($('<p id="errorMessage" class="alert-danger"></p>').text('Make sure to specify all colors.'));
+            return;
+        }
         let evals = gameModel.makeStep(colors);
         displayRow(gameModel.getSteps(), colors, evals);
     };

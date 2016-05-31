@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <table class="table">
+                    <table id="bigTable" class="table">
                         <tbody>
                         @foreach ($guesses as $index => $guess)
                             <tr>
@@ -144,10 +144,10 @@
 @endsection
 
 @section('scripts')
-    <script src="{{\URL::asset('js/transpiled/login.js')}}"></script>
-    <script src="{{\URL::asset('js/transpiled/gameEvent.js')}}"></script>
-    <script src="{{\URL::asset('js/transpiled/gameModel.js')}}"></script>
-    <script src="{{\URL::asset('js/transpiled/gamePersistenceAJAX.js')}}"></script>
-    <script src="{{\URL::asset('js/transpiled/gameUI.js')}}"></script>
-    <script src="{{\URL::asset('js/transpiled/app.js')}}"></script>
+    <script src="{{\URL::asset('js/login.js')}}"></script>
+    <script src="{{\URL::asset('js/gameEvent.js')}}"></script>
+    <script src="{{\URL::asset('js/gameModel.js')}}"></script>
+    <script src="{{\URL::asset('js/gamePersistenceAJAX.js')}}"></script>
+    <script src="{{\URL::asset('js/gameUI.js')}}"></script>
+    <script src="{{\URL::asset('js/app.js')}}"></script>
 @endsection
