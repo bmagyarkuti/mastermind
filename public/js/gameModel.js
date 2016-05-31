@@ -84,7 +84,7 @@ let createGameModel = function () {
         makeStep: makeStep,
         getSteps: function() { return steps; },
         getStepsAllowed: function () { return stepsAllowed; },
-        newGame: init(),
+        newGame: init,
         gameWonEvent: gameWonEvent,
         gameLostEvent: gameLostEvent
     };

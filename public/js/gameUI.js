@@ -26,7 +26,7 @@ let createGameUI = function(model) {
                                 </table>
                             </td>
                          </tr>`;
-    let $wonMessage = $(`<div class="panel panel-default">
+    let wonMessageTemplate = `<div class="panel panel-default">
                 <div class="panel-heading">
                     Congratulations!
                 </div>
@@ -35,8 +35,8 @@ let createGameUI = function(model) {
                         <h2 id="transText"> Here's how your result compares against your own record. </h2>
                         <p id="loading">Uploading your results and retrieving statistics... </p>
                 </div>
-            </div>`);
-    let $lostMessage = $(`<div class="panel panel-default">
+            </div>`;
+    let lostMessageTemplate = `<div class="panel panel-default">
                             <div class="panel-heading">
                                 Hey, so...
                             </div>
@@ -51,9 +51,10 @@ let createGameUI = function(model) {
                                     </div>
                                 </div>
                             </div>
-                        </div>`);
+                        </div>`;
     let colorBoxTemplate = `<div></div>`;
-    let newGameTemplate = `<div class="panel-heading">
+    let newGameTemplate = `<div id="gameTable" class="panel panel-default">
+                <div class="panel-heading">
                     You have <span id="remainingSteps">10</span> turns left.
                 </div>
 
@@ -119,7 +120,10 @@ let createGameUI = function(model) {
                             </tr>
                         </tbody>
                     </table>
-                </div>`;
+                </div>
+        </div>`;
+    let $wonMessage = $(wonMessageTemplate);
+    let $lostMessage = $(lostMessageTemplate);
 
     let init = function() {
         gameModel.gameWonEvent.addListener(displayWin);
@@ -214,10 +218,12 @@ let createGameUI = function(model) {
         $('button#submitButton').click(function (e) {
             e.preventDefault();
             onSubmitButtonClicked();
-            gameModel.newGame();
         });
+        $wonMessage = $(wonMessageTemplate);
+        $lostMessage = $(lostMessageTemplate);
+        model.newGame();
     };
-    
+
     init();
 
     return {
