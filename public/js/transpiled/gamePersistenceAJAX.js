@@ -1,16 +1,20 @@
-let createGamePersistence = function (model, token) {
-    let gameModel = model;
-    let AjaxToken = token;
+'use strict';
 
-    let successfullySavedEvent = createEvent();
-    let couldNotSaveEvent = createEvent();
+var createGamePersistence = function createGamePersistence(model, token) {
+    var gameModel = model;
+    var AjaxToken = token;
 
-    let init = function() {
+    var successfullySavedEvent = createEvent();
+    var couldNotSaveEvent = createEvent();
+
+    var init = function init() {
         model.gameLostEvent.addListener(saveGameAjax);
         model.gameWonEvent.addListener(saveGameAjax);
     };
 
-    let saveGameAjax = function({results}) {
+    var saveGameAjax = function saveGameAjax(_ref) {
+        var results = _ref.results;
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': token
@@ -21,13 +25,13 @@ let createGamePersistence = function (model, token) {
             type: 'POST',
             dataType: 'JSON',
             data: results
-        }).done(function(data) {
+        }).done(function (data) {
             if (data.success) {
                 successfullySavedEvent.notify(data.stats);
             } else {
                 couldNotSaveEvent.notify();
             }
-        }).fail(function() {
+        }).fail(function () {
             couldNotSaveEvent.notify();
         });
     };
@@ -35,7 +39,7 @@ let createGamePersistence = function (model, token) {
     init();
 
     return {
-        successfullySavedEvent : successfullySavedEvent,
-        couldNotSaveEvent : couldNotSaveEvent
+        successfullySavedEvent: successfullySavedEvent,
+        couldNotSaveEvent: couldNotSaveEvent
     };
 };

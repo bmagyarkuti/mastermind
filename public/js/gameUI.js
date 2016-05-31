@@ -95,14 +95,11 @@
             $('#gameTable').after($lostMessage);
         };
 
-        let collectEvals = function(guesses) {
-            return gameModel.makeStep(guesses);
-        };
-        
         let displayWin = function () {
             $('tr#insertRow').hide();
             $('#gameTable').after($wonMessage);
         };
+
 
         let showSuccessResponse = function(stats) {
             let $statistics = $(`<p>You took <strong id="guesses"></strong> steps to crack the code.
@@ -135,15 +132,19 @@
             return $('meta[name="csrf-token"]').attr('content');
         };
 
+        let onSubmitButtonClicked = function() {
+            let colors = collectSelections();
+            let evals = gameModel.makeStep(colors);
+            displayRow(gameModel.getSteps(), colors, evals);
+        };
+
         init();
+
         return {
-            displayRow: displayRow,
-            collectSelections: collectSelections,
-            collectEvals: collectEvals,
-            getSteps: function() { return gameModel.getSteps(); },
             mineAjaxToken: mineAjaxToken,
             showSuccessResponse: showSuccessResponse,
-            showFailureResponse: showFailureResponse
+            showFailureResponse: showFailureResponse,
+            onSubmitButtonClicked: onSubmitButtonClicked
         };
     };
 
@@ -154,9 +155,7 @@
 
         $('button#submitButton').click(function (e) {
             e.preventDefault();
-            let colors = gameUI.collectSelections();
-            let evals = gameUI.collectEvals(colors);
-            gameUI.displayRow(gameUI.getSteps(), colors, evals);
+            gameUI.onSubmitButtonClicked();
         });
 
         persistence.successfullySavedEvent.addListener(function(stats) {
