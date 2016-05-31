@@ -1,7 +1,8 @@
 /**
  * Created by barna on 30/05/16.
  */
-{
+"use strict";
+// {
     let createGameModel = function () {
         let nrTurns = 10;
         let colors = ['white', 'black', 'red', 'green', 'yellow', 'blue'];
@@ -23,7 +24,7 @@
         let evaluatePattern = function (guesses) {
             let localGuesses = guesses.slice();
             let localCodePattern = codePattern.slice();
-            evals = [];
+            let evals = [];
             for (let i = 0; i < 4; ++i) {
                 if (localGuesses[i] === localCodePattern[i]) {
                     evals[i] = "black";
@@ -47,7 +48,7 @@
         let makeStep = function (guesses) {
             steps += 1;
 
-            evals = evaluatePattern(guesses);
+            let evals = evaluatePattern(guesses);
             let isWinningCombo = true;
             evals.forEach(function(color) {
                 if (color !== "black") {
@@ -112,7 +113,7 @@
         };
 
         let collectSelections = function () {
-            selectedColors = [];
+            let selectedColors = [];
             for (let i = 1; i <= 4; ++i) {
                 selectedColors.push($('select[name=color' + i).find(":selected").text())
             }
@@ -129,7 +130,6 @@
             collectEvals: collectEvals,
             getSteps: function() { return gameModel.getSteps(); }
         };
-
     };
 
     let gameUI = createGameUI();
@@ -137,9 +137,9 @@
     $(document).ready(function () {
         $('button#submitButton').click(function (e) {
             e.preventDefault();
-            colors = gameUI.collectSelections();
-            evals = gameUI.collectEvals(colors);
+            let colors = gameUI.collectSelections();
+            let evals = gameUI.collectEvals(colors);
             gameUI.displayRow(gameUI.getSteps(), colors, evals);
         });
-    })
-}
+    });
+// }

@@ -2,7 +2,7 @@
  * Created by barna on 27/05/16.
  */
 
-// fix index.php address (add /)
+"use strict";
 {
     let $link = $('a#login');
     let $modal = $(`<div class="modal fade" id="myModal" role="dialog">
@@ -25,6 +25,7 @@
                             </div>
                         </div>`);
 
+    // fix index.php address (add /)
     let fixURL = function () {
         if (window.location.href === 'http://webprogramozas.inf.elte.hu/hallgatok/mabpafb/mastermind/public/index.php') {
             window.location.href = 'http://webprogramozas.inf.elte.hu/hallgatok/mabpafb/mastermind/public/index.php/';
