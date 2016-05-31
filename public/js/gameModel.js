@@ -2,7 +2,7 @@
  * Created by barna on 31/05/16.
  */
 let createGameModel = function () {
-    let nrTurns = 10;
+    let stepsAllowed = 10;
     let colors = ['white', 'black', 'red', 'green', 'yellow', 'blue'];
     let codePattern = [];
     let started = new Date().getTime();
@@ -10,6 +10,7 @@ let createGameModel = function () {
     let isGameWon = false;
     let steps = 0;
     let isGameOver = false;
+    let gameWonEvent = createEvent(this);
 
     let init = function() {
         for (let i = 0; i < 4; ++i) {
@@ -36,7 +37,7 @@ let createGameModel = function () {
                 evals[i] = "white";
                 localGuesses[i] = null;
                 localCodePattern[patternIndex] = null;
-            } else {
+            } else if (localGuesses[i] !== null){
                 evals[i] = 'neither';
             }
         }
@@ -58,6 +59,9 @@ let createGameModel = function () {
             won = new Date().getTime();
         }
         isGameOver = isWinningCombo || steps === 10;
+        if (isGameOver) {
+            gameWonEvent.notify();
+        }
         return evals;
     };
 
@@ -69,6 +73,8 @@ let createGameModel = function () {
         isGameOver: function() { return isGameOver; },
         getStarted: function() { return started; },
         getWon: function() { return won; },
-        getSteps: function() { return steps; }
+        getSteps: function() { return steps; },
+        getStepsAllowed: function () { return stepsAllowed; },
+        gameWonEvent: gameWonEvent
     };
 };

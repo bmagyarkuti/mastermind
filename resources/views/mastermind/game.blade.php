@@ -5,7 +5,7 @@
         <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    You have {{10 - count($guesses)}} turns left.
+                    You have <span id="remainingSteps">{{10 - count($guesses)}}</span> turns left.
                 </div>
 
                 <div class="panel-body">
@@ -145,4 +145,5 @@
     <script src="{{\URL::asset('js/login.js')}}"></script>
     <script src="{{\URL::asset('js/gameModel.js')}}"></script>
     <script src="{{\URL::asset('js/gameUI.js')}}"></script>
+    <script src="{{\URL::asset('js/gameEvent.js')}}"></script>
 @endsection

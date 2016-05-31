@@ -40,6 +40,7 @@
 
             $('tr#insertRow').before($displayRow);
             $('td#insertCount').text("#" + (gameModel.getSteps() + 1));
+            $('span#remainingSteps').text((gameModel.getStepsAllowed() - gameModel.getSteps()));
         };
 
         let collectSelections = function () {
@@ -71,5 +72,9 @@
             let evals = gameUI.collectEvals(colors);
             gameUI.displayRow(gameUI.getSteps(), colors, evals);
         });
+
+        gameUI.gameWonEvent.addListener(function() {
+            alert("Congrats, you won!");
+        })
     });
 }
