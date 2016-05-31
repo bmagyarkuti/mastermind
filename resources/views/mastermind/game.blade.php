@@ -149,4 +149,5 @@
     <script src="{{\URL::asset('js/transpiled/gameModel.js')}}"></script>
     <script src="{{\URL::asset('js/transpiled/gamePersistenceAJAX.js')}}"></script>
     <script src="{{\URL::asset('js/transpiled/gameUI.js')}}"></script>
+    <script src="{{\URL::asset('js/transpiled/app.js')}}"></script>
 @endsection
