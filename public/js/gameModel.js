@@ -67,9 +67,7 @@ let createGameModel = function () {
             gameLostEvent.notify({
                 codePattern: codePattern,
                 results: {
-                    started: startedDateTime,
-                    won: null,
-                    steps: null
+                    started: startedDateTime
                 }
             });
         }

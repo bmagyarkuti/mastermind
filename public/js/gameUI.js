@@ -111,15 +111,20 @@
             $('#gameTable').after($wonMessage);
         };
 
-        let addStatsToWinMessage = function(stats) {
+        let winPostProcess = function(stats) {
             $('strong#guesses', $wonMessage).text(gameModel.getSteps());
             if (stats.count > 1) {
                 $('strong#average', $wonMessage).text(stats.the_stats.average);
                 $('strong#worst', $wonMessage).text(stats.the_stats.worst);
                 $('strong#best', $wonMessage).text(stats.the_stats.best);
+                $wonMessage.append($(`<p class="alert-success">We have successfully added your scores to the leaderboard.</p>`))
             } else {
                 $('span#statistics', $wonMessage).hide();
             }
+        };
+
+        let lostPostProcess = function () {
+            $wonMessage.append($(`<p class="alert-danger">We couldn't add your scores to the leaderboard.</p>`))
         };
 
         let mineAjaxToken = function() {
@@ -133,12 +138,10 @@
             collectEvals: collectEvals,
             getSteps: function() { return gameModel.getSteps(); },
             mineAjaxToken: mineAjaxToken,
-            addStatsToWinMessage: addStatsToWinMessage
+            winPostProcess: winPostProcess,
+            lostPostProcess: lostPostProcess
         };
     };
-
-    // instantiate classes and inject model dependency
-
 
     $(document).ready(function () {
         let gameModel = createGameModel();
@@ -153,11 +156,11 @@
         });
 
         persistence.successfullySavedEvent.addListener(function(stats) {
-            gameUI.addStatsToWinMessage(stats);
+            gameUI.winPostProcess(stats);
         });
 
         persistence.couldNotSaveEvent.addListener(function() {
-            alert("Couldn't save score");
+            gameUI.lostPostProcess();
         })
     });
 }
