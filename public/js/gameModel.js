@@ -7,7 +7,7 @@ let createGameModel = function () {
     let stepsAllowed = 10;
     let colors = ['white', 'black', 'red', 'green', 'yellow', 'blue'];
     let codePattern = [];
-    let startedDateTime = new Date().getTime();
+    let startedDateTime = Math.round(new Date().getTime()/1000);
     let steps = 0;
     let gameWonEvent = createEvent();
     let gameLostEvent = createEvent();
@@ -59,7 +59,7 @@ let createGameModel = function () {
             gameWonEvent.notify({
                 results: {
                     started: startedDateTime,
-                    won: new Date().getTime(),
+                    won: Math.round(new Date().getTime()/1000),
                     steps: steps
                 }
             });

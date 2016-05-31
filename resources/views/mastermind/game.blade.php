@@ -53,6 +53,8 @@
                             <tr id="insertRow">
                                 <form action="{{url('/step')}}" method="POST" class="form-horizontal">
                                     {{ csrf_field() }}
+                                    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
                                     <td class="hidden-xs" id="insertCount">
                                         #{{count($guesses) + 1}}
                                     </td>
@@ -145,6 +147,6 @@
     <script src="{{\URL::asset('js/login.js')}}"></script>
     <script src="{{\URL::asset('js/gameEvent.js')}}"></script>
     <script src="{{\URL::asset('js/gameModel.js')}}"></script>
+    <script src="{{\URL::asset('js/gamePersistenceAJAX.js')}}"></script>
     <script src="{{\URL::asset('js/gameUI.js')}}"></script>
-    <script src="{{\URL::asset('gamePersistenceAJAX.js')}}"></script>
 @endsection

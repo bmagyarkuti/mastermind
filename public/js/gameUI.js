@@ -37,7 +37,7 @@
                             <p>
                                 You took <strong id="guesses"></strong> steps to crack the code.
                                 <span id="statistics">
-                                    Usually, this takes <strong id="average"></strong>steps.
+                                    Usually, this takes <strong id="average"></strong> steps.
                                     The longest it ever took you to win was <strong id="worst"></strong>
                                     steps. Your best win took <strong id="best"></strong> steps.
                                 </span>
@@ -63,7 +63,7 @@
         let colorBoxTemplate = `<div></div>`;
 
         let init = function() {
-            gameModel.gameWonEvent.addListener(displayRow);
+            gameModel.gameWonEvent.addListener(displayWin);
             gameModel.gameLostEvent.addListener(displayLost);
         };
 
@@ -111,26 +111,53 @@
             $('#gameTable').after($wonMessage);
         };
 
+        let addStatsToWinMessage = function(stats) {
+            $('strong#guesses', $wonMessage).text(gameModel.getSteps());
+            if (stats.count > 1) {
+                $('strong#average', $wonMessage).text(stats.the_stats.average);
+                $('strong#worst', $wonMessage).text(stats.the_stats.worst);
+                $('strong#best', $wonMessage).text(stats.the_stats.best);
+            } else {
+                $('span#statistics', $wonMessage).hide();
+            }
+        };
+
+        let mineAjaxToken = function() {
+            return $('meta[name="csrf-token"]').attr('content');
+        };
+
         init();
         return {
             displayRow: displayRow,
             collectSelections: collectSelections,
             collectEvals: collectEvals,
-            getSteps: function() { return gameModel.getSteps(); }
+            getSteps: function() { return gameModel.getSteps(); },
+            mineAjaxToken: mineAjaxToken,
+            addStatsToWinMessage: addStatsToWinMessage
         };
     };
 
     // instantiate classes and inject model dependency
-    let gameModel = createGameModel();
-    let gameUI = createGameUI(gameModel);
-    createGamePersistence(gameModel);
+
 
     $(document).ready(function () {
+        let gameModel = createGameModel();
+        let gameUI = createGameUI(gameModel);
+        let persistence = createGamePersistence(gameModel, gameUI.mineAjaxToken());
+
         $('button#submitButton').click(function (e) {
             e.preventDefault();
             let colors = gameUI.collectSelections();
             let evals = gameUI.collectEvals(colors);
             gameUI.displayRow(gameUI.getSteps(), colors, evals);
         });
+
+        persistence.successfullySavedEvent.addListener(function(stats) {
+            gameUI.addStatsToWinMessage(stats);
+        });
+
+        persistence.couldNotSaveEvent.addListener(function() {
+            alert("Couldn't save score");
+        })
     });
 }

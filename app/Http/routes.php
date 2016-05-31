@@ -17,6 +17,7 @@ Route::group(['middleware' => ['web']], function() {
     Route::post('step', 'GameController@postStep');
     Route::get('step', 'GameController@getStep');
     Route::get('newGame', 'GameController@newGame');
+    Route::post('ajax/postResults', 'GameController@postResultsAJAX');
 
     // Authentication Routes...
     Route::get('auth/login', 'Auth\AuthController@getLogin');
