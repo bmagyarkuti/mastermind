@@ -99,5 +99,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{\URL::asset('js/transpiled/login.js')}}"></script>
+    <script src="{{\URL::asset('js/login.js')}}"></script>
 @endsection

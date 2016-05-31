@@ -53,7 +53,7 @@
                             <tr id="insertRow">
                                 <form action="{{url('/step')}}" method="POST" class="form-horizontal">
                                     {{ csrf_field() }}
-                                    <td class="hidden-xs">
+                                    <td class="hidden-xs" id="insertCount">
                                         #{{count($guesses) + 1}}
                                     </td>
 
@@ -78,7 +78,6 @@
                         </tbody>
                     </table>
                     @include('common.errors')
-
                 </div>
             </div>
 
@@ -114,33 +113,27 @@
                         Hey, so...
                     </div>
                     <div class="panel-body">
-
-                    <h1>
-                            nope, that's still not it.
-                    </h1>
-
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <p>  However, your lives ran out. The correct pattern was:</p>
-                                </div>
-                                <div class="col-xs-4 col-sm-offset-2">
-                                        <table>
-                                            <tbody>
-                                            <tr>
-                                                @foreach($codePattern as $color)
-
-                                                <td>
-                                                    <div class="btn btn-{{$color}} disabled btn-block">
-                                                        {{$color}}
-                                                    </div>
-                                                </td>
-                                                @endforeach
-
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                </div>
+                        <h1> nope, that's still not it. </h1>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <p>However, your lives ran out. The correct pattern was:</p>
                             </div>
+                            <div class="col-xs-4 col-sm-offset-2">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            @foreach($codePattern as $color)
+                                            <td>
+                                                <div class="btn btn-{{$color}} disabled btn-block">
+                                                    {{$color}}
+                                                </div>
+                                            </td>
+                                            @endforeach
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @endif
@@ -150,5 +143,6 @@
 
 @section('scripts')
     <script src="{{\URL::asset('js/login.js')}}"></script>
-    <script src="{{\URL::asset('js/game.js')}}"></script>
+    <script src="{{\URL::asset('js/gameModel.js')}}"></script>
+    <script src="{{\URL::asset('js/gameUI.js')}}"></script>
 @endsection
