@@ -24,7 +24,7 @@
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <td>
+                                 transpiled/           <td>
                                                 <div id="eval1" class="btn btn-{{$evals[$index][0]}} disabled btn-xs btn-block">x
                                                 </div>
                                             </td>
@@ -144,9 +144,9 @@
 @endsection
 
 @section('scripts')
-    <script src="{{\URL::asset('js/login.js')}}"></script>
-    <script src="{{\URL::asset('js/gameEvent.js')}}"></script>
-    <script src="{{\URL::asset('js/gameModel.js')}}"></script>
-    <script src="{{\URL::asset('js/gamePersistenceAJAX.js')}}"></script>
-    <script src="{{\URL::asset('js/gameUI.js')}}"></script>
+    <script src="{{\URL::asset('js/transpiled/login.js')}}"></script>
+    <script src="{{\URL::asset('js/transpiled/gameEvent.js')}}"></script>
+    <script src="{{\URL::asset('js/transpiled/gameModel.js')}}"></script>
+    <script src="{{\URL::asset('js/transpiled/gamePersistenceAJAX.js')}}"></script>
+    <script src="{{\URL::asset('js/transpiled/gameUI.js')}}"></script>
 @endsection

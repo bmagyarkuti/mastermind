@@ -79,7 +79,7 @@
         let collectSelections = function () {
             let selectedColors = [];
             for (let i = 1; i <= 4; ++i) {
-                selectedColors.push($('select[name=color' + i).find(":selected").text())
+                selectedColors.push($('select[name=color' + i +']').find(":selected").text())
             }
             return selectedColors;
         };
