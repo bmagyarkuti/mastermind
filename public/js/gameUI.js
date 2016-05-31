@@ -33,15 +33,8 @@
                     </div>
                     <div class="panel-body">
                             <h1> You cracked the code! </h1>
-                            <h2> Here's how your result compares against your own record. </h2>
-                            <p>
-                                You took <strong id="guesses"></strong> steps to crack the code.
-                                <span id="statistics">
-                                    Usually, this takes <strong id="average"></strong> steps.
-                                    The longest it ever took you to win was <strong id="worst"></strong>
-                                    steps. Your best win took <strong id="best"></strong> steps.
-                                </span>
-                            </p>
+                            <h2 id="transText"> Here's how your result compares against your own record. </h2>
+                            <p id="loading">Uploading your results and retrieving statistics... </p>
                     </div>
                 </div>`);
         let $lostMessage = $(`<div class="panel panel-default">
@@ -111,20 +104,31 @@
             $('#gameTable').after($wonMessage);
         };
 
-        let winPostProcess = function(stats) {
-            $('strong#guesses', $wonMessage).text(gameModel.getSteps());
+        let showSuccessResponse = function(stats) {
+            let $statistics = $(`<p>You took <strong id="guesses"></strong> steps to crack the code.
+                                <span id="statistics">
+                                    Usually, this takes <strong id="average"></strong> steps.
+                                    The longest it ever took you to win was <strong id="worst"></strong>
+                                    steps. Your best win took <strong id="best"></strong> steps.
+                                </span></p>`);
+            $('strong#guesses', $statistics).text(gameModel.getSteps());
             if (stats.count > 1) {
-                $('strong#average', $wonMessage).text(stats.the_stats.average);
-                $('strong#worst', $wonMessage).text(stats.the_stats.worst);
-                $('strong#best', $wonMessage).text(stats.the_stats.best);
-                $wonMessage.append($(`<p class="alert-success">We have successfully added your scores to the leaderboard.</p>`))
+                $('strong#average', $statistics).text(stats.the_stats.average);
+                $('strong#worst', $statistics).text(stats.the_stats.worst);
+                $('strong#best', $statistics).text(stats.the_stats.best);
+                $('p#loading', $wonMessage).html($statistics.html());
+                $wonMessage.append($(`<p class="alert-success">We have successfully added your scores to the leaderboard.</p>`));
+                $lostMessage.append($(`<p class="alert-success">We have successfully added your scores to the leaderboard.</p>`));
             } else {
-                $('span#statistics', $wonMessage).hide();
+                $('p#loading', $wonMessage).hide();
             }
         };
 
-        let lostPostProcess = function () {
-            $wonMessage.append($(`<p class="alert-danger">We couldn't add your scores to the leaderboard.</p>`))
+        let showFailureResponse = function () {
+            $('p#loading', $wonMessage).hide();
+            $('h2#transText', $wonMessage).hide();
+            $wonMessage.append($(`<p class="alert-danger">We couldn't add your scores to the leaderboard.</p>`));
+            $lostMessage.append($(`<p class="alert-danger">We couldn't add your scores to the leaderboard.</p>`));
         };
 
         let mineAjaxToken = function() {
@@ -138,8 +142,8 @@
             collectEvals: collectEvals,
             getSteps: function() { return gameModel.getSteps(); },
             mineAjaxToken: mineAjaxToken,
-            winPostProcess: winPostProcess,
-            lostPostProcess: lostPostProcess
+            showSuccessResponse: showSuccessResponse,
+            showFailureResponse: showFailureResponse
         };
     };
 
@@ -156,11 +160,11 @@
         });
 
         persistence.successfullySavedEvent.addListener(function(stats) {
-            gameUI.winPostProcess(stats);
+            gameUI.showSuccessResponse(stats);
         });
 
         persistence.couldNotSaveEvent.addListener(function() {
-            gameUI.lostPostProcess();
+            gameUI.showFailureResponse();
         })
     });
 }
