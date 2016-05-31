@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="col-sm-offset-2 col-sm-8">
+        <div id="columnContainer" class="col-sm-offset-2 col-sm-8">
             <div id="gameTable" class="panel panel-default">
                 <div class="panel-heading">
                     You have <span id="remainingSteps">{{10 - count($guesses)}}</span> turns left.

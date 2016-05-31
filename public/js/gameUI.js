@@ -210,15 +210,14 @@ let createGameUI = function(model) {
     };
 
     let startNewGame = function () {
-        $('div#gameTable').html(newGameTemplate);
+        $('div#columnContainer').html(newGameTemplate);
         $('button#submitButton').click(function (e) {
             e.preventDefault();
             onSubmitButtonClicked();
             gameModel.newGame();
         });
-
     };
-
+    
     init();
 
     return {
