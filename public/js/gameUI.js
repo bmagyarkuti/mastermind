@@ -164,7 +164,7 @@ let createGameUI = function(model) {
         let evals = gameModel.makeStep(selectedColors);
         if (gameModel.getSteps() == 3) {
             for (let i = 1; i <=4; ++i) {
-                $('div#btn' + i).attr('class', 'btn-group btn-block dropup');
+                $('div#btn-select' + i).attr('class', 'btn-group btn-block dropup');
             }
         }
         displayRow(gameModel.getSteps(), selectedColors, evals);
@@ -198,12 +198,12 @@ let createGameUI = function(model) {
             $('ul', $button).append($(buttonElementTemplate).html('<a href="#">'+ color + '</a>'));
         });
         for (let i = 1; i <= 4; ++i){
-            let $button_temp = $button.clone().attr('id', 'btn' + i);
+            let $button_temp = $button.clone().attr('id', 'btn-select' + i);
             $('td#selectButtonColumn' + i).html($button_temp);
         }
         for (let i = 1; i <= 4; ++i) {
-            $('div#btn' + i + ' a').click(function() {
-                let $activeButton = $('div#btn' + i + ' button');
+            $('div#btn-select' + i + ' a').click(function() {
+                let $activeButton = $('div#btn-select' + i + ' button');
                 $activeButton.attr('class', 'btn btn-' + $(this).text() + ' btn-block dropdown-toggle');
                 $activeButton.html('<span class="hidden-xs hidden-sm">' + $(this).text() + '</span>' +
                     '<span class="visible-xs visible-sm">' + $(this).text()[0] + '</span><span class="caret"></span>');
