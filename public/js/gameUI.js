@@ -67,50 +67,10 @@ let createGameUI = function(model) {
                                         #1
                                     </td>
 
-                                    <td>
-                                    <select name="color1" title="" class="selectpicker form-control">
-                                            <option disabled selected value>Color...</option>
-                                            <option >white</option>
-                                            <option >black</option>
-                                            <option >red</option>
-                                            <option >green</option>
-                                            <option >yellow</option>
-                                            <option >blue</option>
-                                    </select>
-                                    </td>
-                                    <td>
-                                    <select name="color2" title="" class="selectpicker form-control">
-                                            <option disabled selected value>Color...</option>
-                                            <option >white</option>
-                                            <option >black</option>
-                                            <option >red</option>
-                                            <option >green</option>
-                                            <option >yellow</option>
-                                            <option >blue</option>
-                                    </select>
-                                    </td>
-                                    <td>
-                                    <select name="color3" title="" class="selectpicker form-control">
-                                            <option disabled selected value>Color...</option>
-                                            <option >white</option>
-                                            <option >black</option>
-                                            <option >red</option>
-                                            <option >green</option>
-                                            <option >yellow</option>
-                                            <option >blue</option>
-                                    </select>
-                                    </td>
-                                    <td>
-                                    <select name="color4" title="" class="selectpicker form-control">
-                                            <option disabled selected value>Color...</option>
-                                            <option >white</option>
-                                            <option >black</option>
-                                            <option >red</option>
-                                            <option >green</option>
-                                            <option >yellow</option>
-                                            <option >blue</option>
-                                    </select>
-                                    </td>
+                                    <td id="selectButtonColumn1" class="col-xs-2""> </td>
+                                    <td id="selectButtonColumn2" class="col-xs-2""> </td>
+                                    <td id="selectButtonColumn3" class="col-xs-2""> </td>
+                                    <td id="selectButtonColumn4" class="col-xs-2""> </td>
                                     <td>
                                         <button id="submitButton" type="submit" class="btn btn-default">
                                             <i class="fa fa-btn fa-plus"></i>Send
@@ -202,17 +162,24 @@ let createGameUI = function(model) {
             return;
         }
         let evals = gameModel.makeStep(selectedColors);
+        if (gameModel.getSteps() == 3) {
+            for (let i = 1; i <=4; ++i) {
+                $('div#btn' + i).attr('class', 'btn-group btn-block dropup');
+            }
+        }
         displayRow(gameModel.getSteps(), selectedColors, evals);
     };
 
     let startNewGame = function () {
         $('div#columnContainer').html(newGameTemplate);
+        inputsToBootstrapDropdowns();
         $('button#submitButton').click(function (e) {
             e.preventDefault();
             onSubmitButtonClicked();
         });
         $wonMessage = $(wonMessageTemplate);
         $lostMessage = $(lostMessageTemplate);
+        selectedColors = [];
         model.newGame();
     };
 
