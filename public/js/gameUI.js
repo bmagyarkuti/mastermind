@@ -84,6 +84,21 @@ let createGameUI = function(model) {
         </div>`;
     let $wonMessage = $(wonMessageTemplate);
     let $lostMessage = $(lostMessageTemplate);
+    let alertText = ['sample'];
+    let alertTemplate = `<div id="alertBox" class="alert alert-danger">
+        <strong>Whoops! Something went wrong!</strong>
+        <br><br>
+        <ul>
+                <li>msg</li>
+        </ul>
+    </div>`;
+    let successTemplate = `<div id="successBox" class="alert alert-success">
+        <strong>Yep, I did it!</strong>
+        <br><br>
+        <ul>
+                <li>msg</li>
+        </ul>
+    </div>`;
     let selectedColors = [];
 
     let init = function() {
@@ -136,8 +151,8 @@ let createGameUI = function(model) {
             $('strong#worst', $statistics).text(stats.the_stats.worst);
             $('strong#best', $statistics).text(stats.the_stats.best);
             $('p#loading', $wonMessage).html($statistics.html());
-            $wonMessage.append($(`<p class="alert-success">We have successfully added your scores to the leaderboard.</p>`));
-            $lostMessage.append($(`<p class="alert-success">We have successfully added your scores to the leaderboard.</p>`));
+            $wonMessage.append(successTemplate.replace(/msg/, "We have successfully added your scores to the leaderboard."));
+            $lostMessage.append(successTemplate.replace(/msg/, "We have successfully added your scores to the leaderboard."));
         } else {
             $('p#loading', $wonMessage).hide();
         }
@@ -146,8 +161,8 @@ let createGameUI = function(model) {
     let showFailureResponse = function () {
         $('p#loading', $wonMessage).hide();
         $('h2#transText', $wonMessage).hide();
-        $wonMessage.append($(`<p class="alert-danger">We couldn't add your scores to the leaderboard.</p>`));
-        $lostMessage.append($(`<p class="alert-danger">We couldn't add your scores to the leaderboard.</p>`));
+        $wonMessage.append($(alertTemplate.replace(/msg/, "We couldn't add your scores to the leaderboard")));
+        $lostMessage.append($(alertTemplate.replace(/msg/, "We couldn't add your scores to the leaderboard")));
     };
 
     let mineAjaxToken = function() {
@@ -155,10 +170,10 @@ let createGameUI = function(model) {
     };
 
     let onSubmitButtonClicked = function() {
-        $('p#errorMessage').remove();
+        $('div#alertBox').remove();
         if (selectedColors.length !== 4) {
             let $bigTable = $('table#bigTable');
-            $bigTable.after($('<p id="errorMessage" class="alert-danger"></p>').text('Make sure to specify all colors.'));
+            $bigTable.after($(alertTemplate.replace(/msg/, "Make sure you've specified all colors")));
             return;
         }
         let evals = gameModel.makeStep(selectedColors);
