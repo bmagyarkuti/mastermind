@@ -86,18 +86,10 @@ let createGameUI = function(model) {
     let $lostMessage = $(lostMessageTemplate);
     let alertText = ['sample'];
     let alertTemplate = `<div id="alertBox" class="alert alert-danger">
-        <strong>Whoops! Something went wrong!</strong>
-        <br><br>
-        <ul>
-                <li>msg</li>
-        </ul>
+        <strong>msg</strong>
     </div>`;
     let successTemplate = `<div id="successBox" class="alert alert-success">
-        <strong>Yep, I did it!</strong>
-        <br><br>
-        <ul>
-                <li>msg</li>
-        </ul>
+        <strong>msg</strong>
     </div>`;
     let selectedColors = [];
 
@@ -217,7 +209,8 @@ let createGameUI = function(model) {
             $('td#selectButtonColumn' + i).html($button_temp);
         }
         for (let i = 1; i <= 4; ++i) {
-            $('div#btn-select' + i + ' a').click(function() {
+            $('div#btn-select' + i + ' a').click(function(e) {
+                e.preventDefault();
                 let $activeButton = $('div#btn-select' + i + ' button');
                 $activeButton.attr('class', 'btn btn-' + $(this).text() + ' btn-block dropdown-toggle');
                 $activeButton.html('<span class="hidden-xs hidden-sm">' + $(this).text() + '</span>' +
