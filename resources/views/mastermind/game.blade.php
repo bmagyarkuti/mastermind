@@ -24,7 +24,7 @@
                                     <table>
                                         <tbody>
                                         <tr>
-                                 transpiled/           <td>
+                                            <td>
                                                 <div id="eval1" class="btn btn-{{$evals[$index][0]}} disabled btn-xs btn-block">x
                                                 </div>
                                             </td>
@@ -60,7 +60,7 @@
                                     </td>
 
                                     @for($i = 1; $i <= 4; $i++)
-                                        <td>
+                                        <td id="selectButtonColumn{{$i}}" class="col-xs-2">
                                             <select name="color{{$i}}" title="" class="selectpicker form-control">
                                                 <option disabled selected value>Color...</option>
                                                 @foreach($colors as $color)

@@ -124,6 +124,7 @@ let createGameUI = function(model) {
         </div>`;
     let $wonMessage = $(wonMessageTemplate);
     let $lostMessage = $(lostMessageTemplate);
+    let selectedColors = [];
 
     let init = function() {
         gameModel.gameWonEvent.addListener(displayWin);
@@ -137,21 +138,13 @@ let createGameUI = function(model) {
         for (let i = 0; i < 4; ++i) {
             $('div#btn' + (i + 1), $displayRow).attr('class', 'btn btn-' + colors[i]+ ' disabled btn-block');
             $('div#btn' + (i + 1), $displayRow).html('<span class="hidden-xs hidden-sm">' + colors[i] +
-                                                     '</span> <span class="visible-xs visible-sm">' + colors[i][1]);
+                                                     '</span> <span class="visible-xs visible-sm">' + colors[i][0]);
             $('div#eval'+ (i + 1), $displayRow).attr('class', 'btn btn-' + evals[i] +' disabled btn-xs btn-block')
         }
 
         $('tr#insertRow').before($displayRow);
         $('td#insertCount').text("#" + (gameModel.getSteps() + 1));
         $('span#remainingSteps').text((gameModel.getStepsAllowed() - gameModel.getSteps()));
-    };
-
-    let collectSelections = function () {
-        let selectedColors = [];
-        for (let i = 1; i <= 4; ++i) {
-            selectedColors.push($('select[name=color' + i +']').find(":selected").text())
-        }
-        return selectedColors;
     };
 
     let displayLost =  function({codePattern}) {
@@ -203,14 +196,13 @@ let createGameUI = function(model) {
 
     let onSubmitButtonClicked = function() {
         $('p#errorMessage').remove();
-        let colors = collectSelections();
-        if (colors.indexOf('Color...') !== -1) {
+        if (selectedColors.length !== 4) {
             let $bigTable = $('table#bigTable');
             $bigTable.after($('<p id="errorMessage" class="alert-danger"></p>').text('Make sure to specify all colors.'));
             return;
         }
-        let evals = gameModel.makeStep(colors);
-        displayRow(gameModel.getSteps(), colors, evals);
+        let evals = gameModel.makeStep(selectedColors);
+        displayRow(gameModel.getSteps(), selectedColors, evals);
     };
 
     let startNewGame = function () {
@@ -224,6 +216,35 @@ let createGameUI = function(model) {
         model.newGame();
     };
 
+    let inputsToBootstrapDropdowns = function() {
+        let buttonTemplate = `<div class="btn-group btn-block">
+                                <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="hidden-xs hidden-sm">Color...</span>
+                                    <span class="visible-xs visible-sm"></span><span class="caret"></span>
+                                </button>
+                                <ul id="dropdown-elements" class="dropdown-menu">
+                                </ul>
+                              </div>`;
+        let buttonElementTemplate = `<li></li>`;
+        let $button = $(buttonTemplate);
+        gameModel.getColors().forEach(function(color) {
+            $('ul', $button).append($(buttonElementTemplate).html('<a href="#">'+ color + '</a>'));
+        });
+        for (let i = 1; i <= 4; ++i){
+            let $button_temp = $button.clone().attr('id', 'btn' + i);
+            $('td#selectButtonColumn' + i).html($button_temp);
+        }
+        for (let i = 1; i <= 4; ++i) {
+            $('div#btn' + i + ' a').click(function() {
+                let $activeButton = $('div#btn' + i + ' button');
+                $activeButton.attr('class', 'btn btn-' + $(this).text() + ' btn-block dropdown-toggle');
+                $activeButton.html('<span class="hidden-xs hidden-sm">' + $(this).text() + '</span>' +
+                    '<span class="visible-xs visible-sm">' + $(this).text()[0] + '</span><span class="caret"></span>');
+                selectedColors[i - 1] = $(this).text();
+            })
+        }
+    };
+
     init();
 
     return {
@@ -231,6 +252,7 @@ let createGameUI = function(model) {
         showSuccessResponse: showSuccessResponse,
         showFailureResponse: showFailureResponse,
         onSubmitButtonClicked: onSubmitButtonClicked,
-        startNewGame: startNewGame
+        startNewGame: startNewGame,
+        inputsToBootstrapDropdowns : inputsToBootstrapDropdowns
     };
 };

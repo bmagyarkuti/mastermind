@@ -47,7 +47,6 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a id="newGame" href="{{@url('newGame')}}">New Game</a></li>
-                <li><a href="{{@url('step')}}">Continue Playing</a></li>
                 <li><a href="{{@url('/')}}">Statistics & Leaderboard</a></li>
             </ul>
 

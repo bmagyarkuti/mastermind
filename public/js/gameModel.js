@@ -17,7 +17,7 @@ let createGameModel = function () {
         for (let i = 0; i < 4; ++i) {
             codePattern.push(colors[Math.floor(Math.random() * colors.length)]);
         }
-        startedDateTime = Math.round(new Date().getTime()/1000);
+        startedDateTime = Math.round(new Date().getTime() / 1000);
         steps = 0;
     };
 
@@ -83,7 +83,7 @@ let createGameModel = function () {
             gameWonEvent.notify({
                 results: {
                     started: startedDateTime,
-                    won: Math.round(new Date().getTime()/1000),
+                    won: Math.round(new Date().getTime() / 1000),
                     steps: steps
                 }
             });
@@ -105,6 +105,7 @@ let createGameModel = function () {
         makeStep: makeStep,
         getSteps: function() { return steps; },
         getStepsAllowed: function () { return stepsAllowed; },
+        getColors: function() {return colors;},
         newGame: init,
         gameWonEvent: gameWonEvent,
         gameLostEvent: gameLostEvent
